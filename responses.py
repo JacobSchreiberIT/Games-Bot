@@ -8,6 +8,7 @@ def get_response(message: str) -> str:
         return "HANGMAN"
 
     if lower_message == '!help':
-        return '`This is a help message that you can modify.`'
+        return '-Enter "rock", "paper" or "scissors" to play rock paper scissors\n'\
+'-Enter "hangman" to play the game hangman'
 
-    return 'I didn\'t understand what you wrote. Try typing "!help".'
+    return 'I didn\'t understand what you wrote. Try typing "!help for a list of commands".'
