@@ -1,14 +1,16 @@
 def get_response(message: str) -> str:
-    lower_message = message.lower()
-
-    if lower_message == "rock" or lower_message == "paper" or lower_message == "scissors":
+    if message == "rock" or message == "paper" or message == "scissors":
         return "RPS"
 
-    if lower_message == "hangman":
+    if message == "hangman":
         return "HANGMAN"
 
-    if lower_message == '!help':
+    if message == "gaming hangman":
+        return "GAMING HANGMAN"
+
+    if message == '!help':
         return '-Enter "rock", "paper" or "scissors" to play rock paper scissors\n'\
-'-Enter "hangman" to play the game hangman'
+'-Enter "hangman" to play the game hangman\n'\
+'-Enter "gaming hangman" to play hangman with video game words'
 
     return 'I didn\'t understand what you wrote. Try typing "!help" for a list of commands.'
