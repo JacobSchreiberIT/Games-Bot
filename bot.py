@@ -24,6 +24,34 @@ used_letters = set()
 letters_list = list()
 output_list = list()
 
+def run_discord_bot():
+    intents = discord.Intents.default()
+    intents.message_content = True
+    #sets client to my Client() object
+    client = discord.Client(intents=intents)
+
+    @client.event
+    async def on_ready():
+        print(f'{client.user} is now running!')
+
+    @client.event
+    async def on_message(message):
+        #so bot does not respond to itself
+        if message.author == client.user:
+            return
+
+        #gather info about user
+        username = str(message.author)
+        user_message = str(message.content).lower()
+        channel = str(message.channel)
+
+        print(f'{username} said: "{user_message}" ({channel})')
+
+        await Games(message, user_message, username)
+
+    client.run(os.getenv("token"))
+
+
 async def Games(message, user_message, username):
     if username not in RPS_dict:
         RPS_dict[username] = 0
@@ -133,30 +161,3 @@ async def Games(message, user_message, username):
             await message.channel.send(response)
     except Exception as e:
         print(e)
-
-def run_discord_bot():
-    intents = discord.Intents.default()
-    intents.message_content = True
-    #sets client to my Client() object
-    client = discord.Client(intents=intents)
-
-    @client.event
-    async def on_ready():
-        print(f'{client.user} is now running!')
-
-    @client.event
-    async def on_message(message):
-        #so bot does not respond to itself
-        if message.author == client.user:
-            return
-
-        #gather info about user
-        username = str(message.author)
-        user_message = str(message.content).lower()
-        channel = str(message.channel)
-
-        print(f'{username} said: "{user_message}" ({channel})')
-
-        await Games(message, user_message, username)
-
-    client.run(os.getenv("token"))
